@@ -51,3 +51,18 @@ class CreateTransactionSerializer(serializers.Serializer):
         )
 
         return TransactionSerializer(transaction).data
+
+
+class ReportSerializer(serializers.Serializer):
+    transaction_type = serializers.ChoiceField(choices=Transaction.TRANSACTION_TYPES, required=False)
+    category_type = serializers.ChoiceField(choices=Transaction.CATEGORY_TYPES, required=False)
+    year = serializers.DateTimeField(required=False)
+    quarter = serializers.DateTimeField(required=False)
+    month = serializers.DateTimeField(required=False)
+    week = serializers.DateTimeField(required=False)
+    day = serializers.DateTimeField(required=False)
+    hour = serializers.DateTimeField(required=False)
+    minute = serializers.DateTimeField(required=False)
+    second = serializers.DateTimeField(required=False)
+    sum = serializers.DecimalField(decimal_places=2, max_digits=100)
+    count = serializers.IntegerField()

@@ -1,4 +1,5 @@
-from django.db.models import Sum
+from django.db.models import Sum, Count
+from django.db.models.functions import Trunc
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
@@ -7,7 +8,7 @@ from rest_framework import status, viewsets, filters
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import Transaction
-from .serializers import UserSerializer, TransactionSerializer, CreateTransactionSerializer
+from .serializers import UserSerializer, TransactionSerializer, CreateTransactionSerializer, ReportSerializer
 
 
 class Login(APIView):
@@ -71,3 +72,16 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
         resp = serializer.save()
         return Response(resp)
+
+
+class Reports(APIView):
+    def get(self, request, *args, **kwargs):
+        group_by = request.GET['group_by'].split(';')
+        transactions = Transaction.objects.filter(user=request.user)
+        trunc_list = ["year", "quarter", "month", "week", "day", "hour", "minute", "second"]
+        trunc_dict = {i: Trunc('timestamp', kind=i) for i in trunc_list}
+        transactions = transactions.annotate(**trunc_dict)
+        reports = transactions.values(*group_by).annotate(
+            sum=Sum('amount'), count=Count('id')
+        ).values(*group_by, 'count', 'sum').order_by(*group_by)
+        return Response(ReportSerializer(reports, many=True).data)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Login, Register, UserInfo, TransactionViewSet
+from .views import Login, Register, UserInfo, TransactionViewSet, Reports
 
 transaction_list = TransactionViewSet.as_view({
     'get': 'list',
@@ -19,4 +19,5 @@ urlpatterns = [
     path('user_info/', UserInfo.as_view()),
     path('transactions/', transaction_list),
     path('transactions/<int:pk>/', transaction_detail),
+    path('reports/', Reports.as_view()),
 ]
