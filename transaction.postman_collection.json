@@ -31,7 +31,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/login/",
+					"raw": "http://127.0.0.1:8000/register/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -41,7 +41,7 @@
 					],
 					"port": "8000",
 					"path": [
-						"login",
+						"register",
 						""
 					]
 				}
@@ -328,7 +328,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/transactions/1",
+					"raw": "http://127.0.0.1:8000/transactions/1/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -339,7 +339,8 @@
 					"port": "8000",
 					"path": [
 						"transactions",
-						"1"
+						"1",
+						""
 					]
 				}
 			},
