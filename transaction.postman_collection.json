@@ -317,7 +317,7 @@
 			"response": []
 		},
 		{
-			"name": "update transaction Copy",
+			"name": "delete transaction",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -340,6 +340,47 @@
 					"path": [
 						"transactions",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reports",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/reports?group_by=transaction_type;year",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"reports"
+					],
+					"query": [
+						{
+							"key": "group_by",
+							"value": "transaction_type;year"
+						}
 					]
 				}
 			},
