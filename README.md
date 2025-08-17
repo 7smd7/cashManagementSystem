@@ -1,4 +1,4 @@
-# cashManagementSystem
+# Cash Management System
 Quera Django Technical Task
 
 Instructions:
